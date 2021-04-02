@@ -45,7 +45,7 @@ using WatcherCallback = std::function<bool(const std::set<std::string> &name)>;
 // A helper class for monitoring thermal files changes.
 class ThermalWatcher : public ::android::Thread {
   public:
-    ThermalWatcher(const WatcherCallback &cb)
+    explicit ThermalWatcher(const WatcherCallback &cb)
         : Thread(false), cb_(cb), looper_(new Looper(true)) {}
     ~ThermalWatcher() = default;
 
