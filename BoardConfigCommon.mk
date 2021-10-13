@@ -93,6 +93,7 @@ TARGET_KERNEL_ADDITIONAL_FLAGS += LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-str
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CONFIG := cust_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm6250
+TARGET_COMPILE_WITH_MSM_KERNEL = true
 
 BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
