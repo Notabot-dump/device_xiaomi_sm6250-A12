@@ -33,8 +33,6 @@ namespace thermal {
 namespace V2_0 {
 namespace implementation {
 
-using std::chrono_literals::operator""ms;
-
 void ThermalWatcher::registerFilesToWatch(const std::set<std::string> &sensors_to_watch,
                                           bool uevent_monitor) {
     monitored_sensors_.insert(sensors_to_watch.begin(), sensors_to_watch.end());
@@ -96,9 +94,10 @@ void ThermalWatcher::parseUevent(std::set<std::string> *sensors_set) {
         cp = msg;
         while (*cp) {
             std::string uevent = cp;
+            auto findSubSystemThermal = uevent.find("SUBSYSTEM=thermal");
             if (!thermal_event) {
-                if (uevent.find("SUBSYSTEM=") == 0) {
-                    if (uevent.find("SUBSYSTEM=thermal") != std::string::npos) {
+                if (!uevent.find("SUBSYSTEM=")) {
+                    if (findSubSystemThermal != std::string::npos) {
                         thermal_event = true;
                     } else {
                         break;
